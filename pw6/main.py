@@ -1,5 +1,14 @@
 from input import input_students, input_courses
-from output import list_students, list_courses, sort_students
+
+from output import (
+    list_students,
+    list_courses,
+    sort_students,
+    export_students,
+    export_courses,
+    export_marks,
+    query_students
+)
 
 
 students = input_students()
@@ -15,3 +24,11 @@ students = sort_students(students)
 list_students(students)
 
 list_courses(courses)
+
+# Export CSV
+export_students(students)
+export_courses(courses)
+export_marks(students)
+
+# Query students
+query_students()
