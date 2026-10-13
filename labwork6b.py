@@ -42,4 +42,4 @@ plt.tight_layout()
 plt.savefig('box.png')
 plt.close()
 
-print("Đã tạo và lưu thành công 3 file: scattered.png, histo.png, box.png!")s
+print("Đã tạo và lưu thành công 3 file: scattered.png, histo.png, box.png!")
