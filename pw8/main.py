@@ -1,4 +1,3 @@
-# main.py
 from input import input_students, input_courses
 from output import (
     list_students,
@@ -11,33 +10,26 @@ from output import (
     save_all_data_async
 )
 
-# 1. Nhập sinh viên và môn học
 students = input_students()
 courses = input_courses()
 
-# 2. Nhập điểm
 marks_data = {}
 for course in courses:
     print("\nCourse:", course.name())
     course.input(students)
 
-# 3. Tính GPA cho sinh viên
 for student in students:
     student.calculate_gpa(courses)
     marks_data[student.id()] = student.marks()
 
-# 4. Kích hoạt lưu file .pkl.gz chạy ẩn bằng Threading (PW8)
 save_all_data_async(students, courses, marks_data)
 
-# 5. Sắp xếp và hiển thị danh sách
 students = sort_students(students)
 list_students(students)
 list_courses(courses)
 
-# 6. Xuất CSV
 export_students(students)
 export_courses(courses)
 export_marks(students)
 
-# 7. Tra cứu
 query_students()
