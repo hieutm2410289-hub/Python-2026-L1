@@ -1,4 +1,4 @@
-import ma
+import math
 from .person import Person
 
 class Student(Person):
