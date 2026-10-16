@@ -1,48 +1,31 @@
-import pickle
 import gzip
-
-from domains.student import Student
-from domains.course import Course
-
-
-def save(data, filename):
-    with gzip.open(filename, "wb") as f:
-        pickle.dump(data, f)
+import pickle
+import threading
 
 
-def input_students():
-    students = []
+def save_data_async(data, filename="students.pkl.gz"):
+    def _write_file():
+        try:
+            with gzip.open(filename, "wb") as f:
+                pickle.dump(data, f, protocol=pickle.HIGHEST_PROTOCOL)
+            print(f"\n[Success] Data background-saved to {filename}")
+        except Exception as e:
+            print(f"\n[Error] Failed to save data: {e}")
 
-    n = int(input("Number of students: "))
-
-    for i in range(n):
-        print("\nStudent", i + 1)
-
-        id = input("Student ID: ")
-        name = input("Name: ")
-        dob = input("DoB: ")
-
-        students.append(Student(id, name, dob))
-
-    save(students, "students.pkl.gz")
-
-    return students
+    thread = threading.Thread(target=_write_file, daemon=True)
+    thread.start()
+    return thread
 
 
-def input_courses():
-    courses = []
-
-    n = int(input("\nNumber of courses: "))
-
-    for i in range(n):
-        print("\nCourse", i + 1)
-
-        id = input("Course ID: ")
-        name = input("Course name: ")
-        credit = int(input("Credits: "))
-
-        courses.append(Course(id, name, credit))
-
-    save(courses, "courses.pkl.gz")
-
-    return courses
+def load_data(filename="students.pkl.gz"):
+    try:
+        with gzip.open(filename, "rb") as f:
+            data = pickle.load(f)
+            print(f"[Success] Loaded data from {filename}")
+            return data
+    except FileNotFoundError:
+        print(f"[Info] {filename} not found. Starting with empty data.")
+        return None
+    except Exception as e:
+        print(f"[Error] Failed to load data: {e}")
+        return None
