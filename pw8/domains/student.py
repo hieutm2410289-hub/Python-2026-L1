@@ -1,5 +1,5 @@
-import math
-from domains.person import Person
+import ma
+from .person import Person
 
 class Student(Person):
     def __init__(self, student_id="", name="", dob=""):
