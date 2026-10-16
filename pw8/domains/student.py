@@ -1,7 +1,7 @@
 import math
-from .person import Person
+import numpy as np
 
-class Student(Person):
+class Studen:
     def __init__(self, student_id="", name="", dob=""):
         super().__init__(student_id, name)
         self.__dob = dob
