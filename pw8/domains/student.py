@@ -1,5 +1,10 @@
 import math
-from .person import Person
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from person import Person
 
 class Student(Person):
     def __init__(self, student_id="", name="", dob=""):
